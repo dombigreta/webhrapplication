@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>React + Spring</title>
+    <title>webhr-application</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <style type="text/css">
         <%@ include file="resources/main.css" %>
@@ -13,16 +13,33 @@
 <script src="https://fb.me/react-15.0.1.js"></script>
 <script src="https://fb.me/react-dom-15.0.1.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
 
 <script type="text/babel">
     var MainPage = React.createClass({
+
+        loadData:function(){
+            var self = this;
+            $.ajax({url:'/applicants'}).then(function(data){
+                console.log(data);
+            })
+        },
+        componentDidMount:function(){
+            this.loadData();
+        },
+        handleClick(urlaction){
+            alert(urlaction);
+        },
+
         render: function() {
             var links = [{displayName:'Home', urlName:''},{displayName:'Applicants', urlName:'applicants'},{displayName:'Jobs', urlName:'jobs'}];
+
+
             return (
                 <div>
                     <nav className="d-flex navigation-bar mb-4">
-                        {links.map((link,i) => <div key={i}><a className="mr-2 navigation-link" href={`/${link.urlName}`}>{link.displayName}</a></div>)}
+                        {links.map((link,i) => <div  key={i}><a className="mr-2 navigation-link" onClick={() => this.handleClick(link.urlName)}>{link.displayName}</a></div>)}
                     </nav>
                     <div className="content-holder">
                         <div className="content-box">
@@ -57,7 +74,6 @@
                 </div>);
         }
     });
-
 
     ReactDOM.render(
         <MainPage />, document.getElementById('root')
