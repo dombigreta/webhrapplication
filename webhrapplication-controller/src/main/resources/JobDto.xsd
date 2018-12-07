@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="JobDto" xmlns="JobDto"
+           elementFormDefault="qualified">
+    <xs:complexType name="JobDto">
+        <xs:sequence>
+            <xs:element name="Name" type="xs:string"/>
+            <xs:element name="Description" type="xs:string"/>
+            <xs:element name="NumberOfApplicants" type="xs:int"/>
+            <xs:element name="NumberOfFreePlaces" type="xs:int"/>
+            <xs:element name="Payment" type="xs:int"/>
+            <xs:element name="Currency" type="xs:string"/>
+            <xs:element name="CareerType" type="xs:string"/>
+            <xs:element name="Location" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>
