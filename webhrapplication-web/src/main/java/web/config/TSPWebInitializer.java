@@ -17,10 +17,11 @@ public class TSPWebInitializer implements WebApplicationInitializer {
         acwactx.register(JobContext.class);
         acwactx.setServletContext(servletContext);
 
-        ServletRegistration.Dynamic servletRegistration = servletContext.addServlet("dispatcher", new DispatcherServlet((WebApplicationContext) acwactx));
 
+        ServletRegistration.Dynamic servletRegistration = servletContext.addServlet("dispatcher", new DispatcherServlet((WebApplicationContext) acwactx));
         servletRegistration.setLoadOnStartup(1);
         servletRegistration.addMapping("/");
+
 
     }
 }

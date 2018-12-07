@@ -1,6 +1,5 @@
 package hu.miskolc.iit.application.controller;
 
-import com.sun.org.glassfish.gmbal.ParameterNames;
 import hu.miskolc.iit.application.Exceptions.ApplicantIsNotFoundException;
 import hu.miskolc.iit.application.Exceptions.WrongEducationTypeException;
 import hu.miskolc.iit.application.Exceptions.WrongGenderException;
@@ -10,6 +9,7 @@ import hu.miskolc.iit.application.controller.Dtos.ApplicantDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import java.util.List;
 
@@ -77,7 +77,7 @@ public class ApplicantController {
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(NumberFormatException.class)
+    @ExceptionHandler(MethodArgumentTypeMismatchException.class)
     public String HandleInvalidIdInput(Exception e)
     {
         return "The id you have given was not valid! Please only use numbers!";

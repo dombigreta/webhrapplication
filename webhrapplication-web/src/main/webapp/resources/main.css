@@ -1,0 +1,40 @@
+body{
+    font-size:0.9rem;
+}
+
+.navigation-bar{
+    background-color: #0097A7;
+    padding:0.2rem;
+    width: 80%;
+    margin:auto;
+    border-bottom:4px solid  #00838F;
+}
+
+.navigation-link{
+    color:rgba(255,255,255,0.87);
+    text-decoration: none;
+    font-weight: 400;
+
+}
+
+.navigation-link:hover {
+    color:rgba(255,255,255,1);
+    text-decoration: none;
+
+}
+
+.content-holder{
+    font-size:0.7rem;
+    width:80%;
+    text-align: justify;
+    margin:auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.content-box{
+    background-color: #eeeeee;
+    color: #606060;
+    margin-bottom:1rem;
+    padding:0.5rem;
+}
