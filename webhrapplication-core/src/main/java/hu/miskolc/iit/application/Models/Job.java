@@ -15,6 +15,11 @@ public class Job {
     private CareerType careerType;
     private Location location;
 
+    public Job()
+    {
+
+    }
+
     public Job(int id, String name, String description, int numberOfApplicants, int numberOfFreeSpaces, int payment, CurrencyType currency, CareerType careerType, Location location) {
         Id = id;
         Name = name;
@@ -25,6 +30,11 @@ public class Job {
         this.currency = currency;
         this.careerType = careerType;
         this.location = location;
+    }
+
+    public void setId(int id)
+    {
+        Id = id;
     }
 
     public int getId() {

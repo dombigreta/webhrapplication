@@ -1,9 +1,8 @@
-package hu.miskolc.iit.application.daoservice;
+package hu.miskolc.iit.application.dao;
 
 import hu.miskolc.iit.application.Exceptions.JobIsNotFoundException;
 import hu.miskolc.iit.application.Models.Job;
 
-import java.util.Collection;
 import java.util.List;
 
 public interface JobRepository {

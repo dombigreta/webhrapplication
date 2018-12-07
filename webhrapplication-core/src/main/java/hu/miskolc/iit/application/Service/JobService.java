@@ -1,4 +1,4 @@
-package hu.miskolc.iit.application.service;
+package hu.miskolc.iit.application.Service;
 
 import hu.miskolc.iit.application.Exceptions.JobIsNotFoundException;
 import hu.miskolc.iit.application.Exceptions.WrongCareerTypeException;

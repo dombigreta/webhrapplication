@@ -1,5 +1,7 @@
 package hu.miskolc.iit.application.controller.Dtos;
 
+import hu.miskolc.iit.application.Models.Job;
+
 public class JobDto {
     private String Name;
     private String Description;
@@ -10,6 +12,10 @@ public class JobDto {
     private String careerType;
     private String location;
 
+    public JobDto()
+    {
+
+    }
 
     public JobDto(String name, String description, int numberOfApplicants, int numberOfFreePlaces, int payment, String currency, String careerType, String location) {
         Name = name;

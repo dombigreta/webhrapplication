@@ -5,11 +5,10 @@ import hu.miskolc.iit.application.Helpers.CareerType;
 import hu.miskolc.iit.application.Helpers.CurrencyType;
 import hu.miskolc.iit.application.Helpers.Location;
 import hu.miskolc.iit.application.Models.Job;
-import hu.miskolc.iit.application.daoservice.JobRepository;
+import hu.miskolc.iit.application.dao.JobRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.NoSuchElementException;
 

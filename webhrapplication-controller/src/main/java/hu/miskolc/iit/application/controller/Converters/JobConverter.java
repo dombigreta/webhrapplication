@@ -1,6 +1,12 @@
 package hu.miskolc.iit.application.controller.Converters;
 
 
+import hu.miskolc.iit.application.Exceptions.WrongCareerTypeException;
+import hu.miskolc.iit.application.Exceptions.WrongCurrencyTypeException;
+import hu.miskolc.iit.application.Exceptions.WrongLocationException;
+import hu.miskolc.iit.application.Helpers.CareerType;
+import hu.miskolc.iit.application.Helpers.CurrencyType;
+import hu.miskolc.iit.application.Helpers.Location;
 import hu.miskolc.iit.application.Models.Job;
 import hu.miskolc.iit.application.controller.Dtos.JobDto;
 
@@ -40,6 +46,48 @@ public class JobConverter {
         });
 
         return jobDtos;
+    }
+
+    public static Job ConvertJobDtoToJob(JobDto jobDto) throws WrongLocationException, WrongCareerTypeException, WrongCurrencyTypeException
+    {
+
+        Location location;
+        CareerType career;
+        CurrencyType currency;
+        try
+        {
+            location = Location.valueOf(jobDto.getLocation().toUpperCase());
+        }catch (IllegalArgumentException e)
+        {
+            throw new WrongLocationException(jobDto.getLocation());
+        }
+
+        try
+        {
+            career = CareerType.valueOf(jobDto.getCareerType().toUpperCase());
+        }catch (IllegalArgumentException e)
+        {
+            throw new WrongCareerTypeException(jobDto.getCareerType());
+        }
+
+
+        try
+        {
+            currency = CurrencyType.valueOf(jobDto.getCurrency().toUpperCase());
+        }catch (IllegalArgumentException e)
+        {
+            throw new WrongCurrencyTypeException(jobDto.getCurrency());
+
+        }
+        Job job = new Job();
+        job.setCareerType(CareerType.valueOf(jobDto.getCareerType().toUpperCase()));
+        job.setCurrency(CurrencyType.valueOf(jobDto.getCurrency().toUpperCase()));
+        job.setLocation(Location.valueOf(jobDto.getLocation().toUpperCase()));
+        job.setDescription(jobDto.getDescription());
+        job.setName(jobDto.getName());
+        job.setNumberOfApplicants(jobDto.getNumberOfApplicants());
+        job.setNumberOfFreeSpaces(jobDto.getNumberOfFreePlaces());
+        return job;
     }
 
 }

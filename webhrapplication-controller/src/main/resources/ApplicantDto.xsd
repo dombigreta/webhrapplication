@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="ApplicantDto" xmlns="ApplicantDto"
+           elementFormDefault="qualified">
+    <xs:complexType name="ApplicantDto">
+        <xs:sequence>
+            <xs:element name="FirstName" type="xs:string"/>
+            <xs:element name="LastName" type="xs:string"/>
+            <xs:element name="MiddleName" type="xs:string"/>
+            <xs:element name="Gender" type="xs:string"/>
+            <xs:element name="Address" type="xs:string"/>
+            <xs:element name="Education" type="xs:string"/>
+            <xs:element name="Age" type="xs:int"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

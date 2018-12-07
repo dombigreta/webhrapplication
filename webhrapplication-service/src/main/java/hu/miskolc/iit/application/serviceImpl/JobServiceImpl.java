@@ -8,13 +8,12 @@ import hu.miskolc.iit.application.Helpers.CareerType;
 import hu.miskolc.iit.application.Helpers.CurrencyType;
 import hu.miskolc.iit.application.Helpers.Location;
 import hu.miskolc.iit.application.Models.Job;
-import hu.miskolc.iit.application.daoservice.JobRepository;
-import hu.miskolc.iit.application.service.JobService;
+import hu.miskolc.iit.application.dao.JobRepository;
+import hu.miskolc.iit.application.Service.JobService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import static java.util.Objects.isNull;
@@ -108,45 +107,8 @@ public class JobServiceImpl implements JobService {
     @Override
     public void addNewJob(Job job)  throws WrongLocationException, WrongCareerTypeException, WrongCurrencyTypeException
     {
-        Location location;
-        CareerType career;
-        CurrencyType currency;
-        try
-        {
-            location = Location.valueOf(job.getLocation().toString().toUpperCase());
-        }catch (IllegalArgumentException e)
-        {
-            throw new WrongLocationException(job.getLocation().toString());
-        }
-
-        try
-        {
-            career = CareerType.valueOf(job.getCareerType().toString().toUpperCase());
-        }catch (IllegalArgumentException e)
-        {
-            throw new WrongCareerTypeException(job.getCareerType().toString());
-        }
-
-
-        try
-        {
-            currency = CurrencyType.valueOf(job.getCurrency().toString().toUpperCase());
-        }catch (IllegalArgumentException e)
-        {
-            throw new WrongCurrencyTypeException(job.getCurrency().toString());
-        }
-
-
-        Job jobToBeadded = new Job(   repository.getLastId(),
-                job.getName(),
-                job.getDescription(),
-                job.getNumberOfApplicants(),
-                job.getNumberOfFreeSpaces(),
-                job.getPayment(),
-                job.getCurrency(),
-                job.getCareerType(),
-                job.getLocation());
-        repository.save(jobToBeadded);
+        job.setId(repository.getLastId());
+        repository.save(job);
     }
 
     @Override

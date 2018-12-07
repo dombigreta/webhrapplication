@@ -2,7 +2,7 @@ package web.config;
 
 
 import hu.miskolc.iit.application.controller.JobController;
-import hu.miskolc.iit.application.service.JobService;
+import hu.miskolc.iit.application.Service.JobService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;

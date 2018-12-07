@@ -1,9 +1,12 @@
 package hu.miskolc.iit.application.controller;
 
 import hu.miskolc.iit.application.Exceptions.JobIsNotFoundException;
+import hu.miskolc.iit.application.Exceptions.WrongCareerTypeException;
+import hu.miskolc.iit.application.Exceptions.WrongCurrencyTypeException;
+import hu.miskolc.iit.application.Exceptions.WrongLocationException;
 import hu.miskolc.iit.application.controller.Converters.JobConverter;
 import hu.miskolc.iit.application.controller.Dtos.JobDto;
-import hu.miskolc.iit.application.service.JobService;
+import hu.miskolc.iit.application.Service.JobService;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -41,6 +44,14 @@ public class JobController {
         return JobConverter.ConvertJobListToJobDto(jobService.filterJobs(currency,location,career));
     }
 
+    /*Post Mappings*/
+    @PostMapping(value="/newJob",consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public void addJob(@RequestBody JobDto job)
+    {
+        jobService.addNewJob(JobConverter.ConvertJobDtoToJob(job));
+    }
+
+    /*Delete Mappings*/
     @DeleteMapping(value="/deleteJob/{id}")
     public void DeleteJob(@PathVariable("id") int id)
     {
@@ -55,5 +66,32 @@ public class JobController {
         return e.getMessage();
     }
 
-    
+    @ResponseStatus(value=HttpStatus.INTERNAL_SERVER_ERROR)
+    @ExceptionHandler(WrongLocationException.class)
+    public String WrongLocationExceptionHandler(WrongLocationException e)
+    {
+        return e.getMessage();
+    }
+
+    @ResponseStatus(value=HttpStatus.INTERNAL_SERVER_ERROR)
+    @ExceptionHandler(WrongCareerTypeException.class)
+    public String WrongCareerTypeExceptionHandler(WrongCareerTypeException e)
+    {
+        return e.getMessage();
+    }
+
+    @ResponseStatus(value=HttpStatus.INTERNAL_SERVER_ERROR)
+    @ExceptionHandler(WrongCurrencyTypeException.class)
+    public String WrongCurrencyTypeExceptionHandler(WrongCurrencyTypeException e)
+    {
+        return e.getMessage();
+    }
+
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    public String BadRequestHandler()
+    {
+        return "invalid argument!";
+    }
+
+
 }
