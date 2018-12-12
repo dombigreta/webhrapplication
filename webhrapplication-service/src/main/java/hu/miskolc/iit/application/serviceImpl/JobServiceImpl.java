@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static java.util.Objects.isNull;
@@ -116,6 +117,18 @@ public class JobServiceImpl implements JobService {
     {
         repository.remove(id);
     }
+
+    @Override
+    public List<CurrencyType> GetCurrencies()
+    {
+        return Arrays.asList(CurrencyType.values());
+    }
+
+    @Override
+    public List<Location> GetLocations(){return Arrays.asList(Location.values());}
+
+    @Override
+    public List<CareerType> GetCareers(){return Arrays.asList(CareerType.values());};
 
 
 }

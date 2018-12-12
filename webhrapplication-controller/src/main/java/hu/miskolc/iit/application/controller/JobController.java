@@ -13,6 +13,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/jobs")
@@ -26,23 +27,38 @@ public class JobController {
 
     /*Get Mappings*/
     @GetMapping(value = "", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public List<JobDto> GetAllJobs()
-    {
+    public List<JobDto> GetAllJobs() {
         return JobConverter.ConvertJobListToJobDto(jobService.getAllJobs());
     }
-    @GetMapping(value="/{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public JobDto GetJobById(@PathVariable("id") int id)
-    {
+
+    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public JobDto GetJobById(@PathVariable("id") int id) {
         return JobConverter.ConvertJobToJobDto(jobService.getJobById(id));
     }
 
-    @GetMapping(value="/filterJobs", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @GetMapping(value = "/filterJobs", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public List<JobDto> FilterJobs(@RequestParam(value = "currency", required = false) String currency,
-                                   @RequestParam(value="location",required = false) String location,
-                                   @RequestParam(value="career", required = false)  String career)
-    {
-        return JobConverter.ConvertJobListToJobDto(jobService.filterJobs(currency,location,career));
+                                   @RequestParam(value = "location", required = false) String location,
+                                   @RequestParam(value = "career", required = false) String career) {
+        return JobConverter.ConvertJobListToJobDto(jobService.filterJobs(currency, location, career));
     }
+
+    @GetMapping("/currencies")
+    public List<String> GetCurrencies() {
+        return jobService.GetCurrencies().stream().map(x -> x.toString()).collect(Collectors.toList());
+    }
+
+    @GetMapping("/locations")
+    public List<String> Locations() {
+        return jobService.GetLocations().stream().map(x -> x.toString()).collect(Collectors.toList());
+    }
+
+    @GetMapping("/careers")
+    public List<String> Careers()
+    {
+        return jobService.GetCareers().stream().map(x -> x.toString()).collect(Collectors.toList());
+    }
+
 
     /*Post Mappings*/
     @PostMapping(value="/newJob",consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
