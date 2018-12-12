@@ -87,7 +87,7 @@ public class JobServiceImpl implements JobService {
                 try
                 {
                     CareerType careerFilter = CareerType.valueOf(career.toUpperCase());
-                    if(job.getCareerType().equals(careerFilter))
+                    if(!job.getCareerType().equals(careerFilter))
                     {
                         jobsToBeRemoved.add(job);
                         continue;

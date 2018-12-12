@@ -23,11 +23,19 @@ const JobPage = React.createClass({
         var self = this;
         var {SelectedCurrency, SelectedLocation, SelectedCareer} = self.state;
         var baseUrl = 'jobs/filterJobs?';
+        var urlParams =[];
 
         var currencyUrlParam = SelectedCurrency.trim().length > 0 ? `currency=${SelectedCurrency}` : '';
         var locationUrlParam = SelectedLocation.trim().length > 0 ? `location=${SelectedLocation}`: '';
-        var careerUrlParam = SelectedCareer.trim().length > 0 ? `carrer=${SelectedCareer}` : '';
-        $.ajax(baseUrl + currencyUrlParam + '&&' + locationUrlParam + '&&'+ careerUrlParam)
+        var careerUrlParam = SelectedCareer.trim().length > 0 ? `career=${SelectedCareer}` : '';
+
+        Array.prototype.push.apply(urlParams, [currencyUrlParam,locationUrlParam,careerUrlParam]);
+
+        urlParams = urlParams.filter(x => x.trim().length != 0);
+
+        var queryString  = urlParams.join('&&');
+
+        $.ajax(baseUrl + queryString)
             .then(filteredJobs => self.setState({Jobs:filteredJobs}));
    },
 
